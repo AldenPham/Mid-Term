@@ -12,7 +12,7 @@
 * Id Khách hàng 
 * name
 * phone number
-
+* CCCD
 
 ##### (2). Nhóm khách hàng 
 * Id Nhóm Khách Hàng
@@ -28,7 +28,7 @@
 ##### (4). Nhóm phòng
 * Mã nhóm phòng
 * Tên nhóm
-* Loại phòng (delux, president, standard) 
+* Loại phòng (deluxe, president, standard) 
 ##### (5). Hợp đồng thuê phòng
 * Thời gian thuê
 * Thời gian nhận/ trả.
@@ -55,7 +55,7 @@
 * Id Khách hàng __*(PrimaryKey)*__ 
 * name
 * phone number
-
+* CCCD
 
 ##### (2). Nhóm khách hàng 
 * Id Nhóm Khách Hàng __*(PrimaryKey)*__ 
@@ -71,7 +71,7 @@
 ##### (4). Nhóm phòng
 * Mã nhóm phòng __*(PrimaryKey)*__ 
 * Tên nhóm
-* Loại phòng (delux, president, standard) 
+* Loại phòng (deluxe, president, standard) 
 ##### (5). Hợp đồng thuê phòng
 * Thời gian thuê
 * Thời gian nhận/ trả.
