@@ -6,4 +6,5 @@
 6. Tìm hạng phòng được đặt ít nhất
 7. Xem chi tiết số tiền từng hạng phòng mang lại
 8. Thống kê doanh thu theo quý 
-9. 
+9. Tính tổng doanh thu khách đã chi cho khách sạn 
+10. Tìm khách hàng quay trở lại nhiều nhất 
