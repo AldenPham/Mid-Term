@@ -90,7 +90,3 @@
 
 
 
-
-#### **3.** _Chuẩn hóa lược đồ thành dạng chuẩn 3_ 
-
-#### **4.** _Trả lời 10 câu hỏi mình thích, viết bằng lambda và link queue_ 
