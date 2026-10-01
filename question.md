@@ -26,7 +26,7 @@ Hợp đồng có thể chi trả thành nhiều lần, nhiều lần sẽ đư�
     họ tên người nộp
     số tiền nộp
 
-``1. Xác định các thực thể, các thuộc tính khóa, mô tả thực thể``
+``1. Xác định các thực thể, các thuộc tính khóa, mô tả thực thể ERD(entity relationship diagram)``
 
     `(1) Nhóm thợ`
         -Mã nhóm thợ (Primary Key)
@@ -52,18 +52,34 @@ Hợp đồng có thể chi trả thành nhiều lần, nhiều lần sẽ đư�
     `(8) Phiếu thu`
         -Mã phiếu thu (Primary Key)
 
+
+    (1) -(1-n)- (2) //Thuộc nhóm
+    (1) -(1-1)- (2) //Trưởng nhóm
     
+     (3) -(1-n)- (4)
+        //
+
+    (5) -(1-n)- (6) -(1-n)- (7) -(1-n)- (8)
+        //Sở hữu    //Hợp đồng  //Chi trả
+
+   
+
+
 ``2. Xác định mối liên kết giữa các thực thể, từ đó đưa ra lược đề quan hệ thực thể kết hợp``
 
 `(1) Nhóm thợ (Mã nhóm thợ, tên nhóm, ...)`
-`(2) Thợ (mã thợ, họ tên, địa chỉ, ...)`
-`(3) Nhóm công việc(Mã nhóm công việc, tên nhóm công việc, ...)`
-`(4) Công việc (Mã công việc, tên công việc, độ khó, ...)`
+`(2) Thợ (mã thợ(PK), họ tên, địa chỉ, mã nhóm công việc (FK) ...)`
+`(3) Nhóm công việc(Mã nhóm công việc(PK), tên nhóm công việc, ,...)`
+`(4) Công việc (Mã công việc, tên công việc, độ khó, Mã nhóm công việc (FK) ...)`
 `(5) Khách hàng (Mã khách hàng, tên khách hàng, ngày sinh, địa chỉ, số điện thoại, ...)`
-`(6) Xe (mã xe, số xe, hãng xe, màu xe, ...)`
-`(7 Hợp đồng sữa xe(Mã hợp đồng, ngày ký, ngày thanh lý, điều kiện, giá, ...)`
-`(8) Phiếu thu (Mã phiếu thu, số tiền, họ tên, ngày nộp, ...)`
-    
+`(6) Xe (mã xe, số xe, hãng xe, màu xe, mã khách hàng (FK), ...)`
+`(7 Hợp đồng sữa xe(Mã hợp đồng, ngày ký, ngày thanh lý, điều kiện, giá, Số xe (FK) ...)`
+`(8) Phiếu thu (Mã phiếu thu, số tiền, họ tên, ngày nộp, số hợp đồng (FK) ...)`
+    RR
+`(9) chi tiết hợp đồng sữa chữa xe ([Số hợp đồng, mã công việc] (PK), ma tho, khoán thợ)`
+`(10) Khả năng ([ma tho, ma cong viec] (PK), ....)`
+
+
 ``3 ``
     Chuẩn hóa lược đồ về chuẩn số 3
 ``4``
