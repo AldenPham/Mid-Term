@@ -143,6 +143,15 @@ public class hotelService {
             return false;
         }
 
+        if (contract.getCheckInTime() != null) {
+            System.out.println("Customer has already checked in");
+            return false;
+        }   
+
+         if (contract.getStatus() != contractStatus.onGoing) {
+            System.out.println("Contract is already completed");
+            return false;
+        }
 
         // Check if the check-in time is valid
         if(checkInTime.isBefore(contract.getStartTime()) || checkInTime.isAfter(contract.getEndTime())){
@@ -165,6 +174,15 @@ public class hotelService {
             return false;
         }
 
+        if (contract.getCheckInTime() == null) {
+            System.out.println("Customer has not checked in");
+            return false;
+        }
+
+        if (contract.getStatus() != contractStatus.onGoing) {
+            System.out.println("Contract is already completed");
+            return false;
+        }
 
         // Check if the check-out time is valid
         if(checkOutTime.isBefore(contract.getCheckInTime())){
@@ -181,17 +199,33 @@ public class hotelService {
     }
 
     // ===== Calculate bill
+    // ====== Calculate room fee
     public double calculateRoomFee(RentalContract contract){
-        
-        long days = contract.getEndTime().toLocalDate().toEpochDay() - contract.getStartTime().toLocalDate().toEpochDay();
+        if (contract.getCheckOutTime() == null) {
+            return 0;
+        }
+
+        long days = contract.getCheckOutTime().toLocalDate().toEpochDay() - contract.getStartTime().toLocalDate().toEpochDay();
 
         return (double) days * contract.getRoom().getRoomPrice();
     }
-    public double calculateOverstayFee(RentalContract contract){
-        long days = contract.getCheckOutTime().toLocalDate().toEpochDay() - contract.getEndTime().toLocalDate().toEpochDay();
 
-        return contract.getOverStayFeePerDay() * (double) days;
+    // ====== Calculate overstay fee
+    public double calculateOverstayFee(RentalContract contract){
+        if (contract.getCheckOutTime() == null) {
+            return 0;
+        }
+
+        long days = Math.max(
+            0,
+            contract.getCheckOutTime().toLocalDate().toEpochDay()
+                - contract.getEndTime().toLocalDate().toEpochDay()
+        );
+
+        return contract.getOverStayFeePerDay() * days;
     }
+
+    // ====== Calculate utility fee
     public double calculateUtilityFee(RentalContract contract){
         double total = 0.0;
         for(utility u : contract.getRoom().getRoomGroup().getUtilities()){
@@ -211,7 +245,7 @@ public class hotelService {
 
         double deposit = roomFee * 0.10;
 
-        double total = roomFee + overstayFee + utilityFee;
+        double total = roomFee + overstayFee + utilityFee - deposit;
 
         Invoice invoice = new Invoice(
             "I" + (invoices.size() + 1),
