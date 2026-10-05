@@ -240,7 +240,11 @@ public class hotelService {
         return contract.getOverStayFeePerDay() * (double) days;
     }
     public double calculateUtilityFee(RentalContract contract){
-        return 0.0;
+        double total = 0.0;
+        for(utility u : contract.getRoom().getRoomGroup().getUtilities()){
+            total += u.getUtilityPrice();
+        }
+        return total;
     }
 
     // ===== CREATE INVOICE
