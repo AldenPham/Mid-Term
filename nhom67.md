@@ -30,11 +30,11 @@
 * Tên nhóm
 * Loại phòng (deluxe, president, standard) 
 ##### (5). Hợp đồng thuê phòng
-* Thời gian thuê
-* Thời gian nhận/ trả.
-* Phí đi kèm
-* Policy nếu overstay
-* Ai chịu trách nhiệm
+* Thời gian thuê //
+* Thời gian nhận/ trả. //
+* Phí đi kèm //
+* Policy nếu overstay //Overstay Price
+* Ai chịu trách nhiệm //Room and Customer 
 ##### (6). Phiếu tính tiền
 * Phương thức tính tiền (CASH, CARD)
 * Cọc (tổng giá tiền phòng * 10% = cọc)
