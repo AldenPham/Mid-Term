@@ -13,6 +13,8 @@ public class hotelService {
     private List<Room> rooms;
     private List<RentalContract> contracts;
     private List<Invoice> invoices;
+    private static int invoiceCounter = 0;
+    private static int contractCounter = 0;
 
     // ===== Constructor
     public hotelService() {
@@ -123,7 +125,7 @@ public class hotelService {
             room.setRoomStatus(roomStatus.BOOKED);
             // Create a new rental contract
             RentalContract contract = new RentalContract(
-                "C" + (contracts.size() + 1),
+                "C" + (contractCounter++),
                 customer,
                 room,
                 startTime,
@@ -279,7 +281,7 @@ public class hotelService {
         double total = roomFee + overstayFee + utilityFee - deposit;
 
         Invoice invoice = new Invoice(
-            "I" + (invoices.size() + 1),
+            "I" + (invoiceCounter++),
             payer,
             contract,
             paymentType,
