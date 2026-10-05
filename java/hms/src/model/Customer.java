@@ -28,4 +28,20 @@ public class Customer {
     public String get_id(){
         return id;
     }
+
+    public String getCustomerName(){
+        return name;
+    }   
+
+    public String toString() {
+        return "Customer{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", cccd='" + cccd + '\'' +
+                ", timeStayed=" + timeStayed +
+                ", moneySpended=" + moneySpended +
+                ", type=" + type +
+                '}';
+    }
 }

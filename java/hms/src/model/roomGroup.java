@@ -17,4 +17,12 @@ public class roomGroup {
     public roomType getType() {
         return type;
     }
+
+    public String toString() {
+        return "roomGroup{" +
+                "groupName='" + groupName + '\'' +
+                ", groupId='" + groupId + '\'' +
+                ", type=" + type +
+                '}';
+    }
 }

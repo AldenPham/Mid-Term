@@ -45,4 +45,15 @@ public class Room {
         return inGroup.getType();
     }
 
+    public String toString() {
+        return "Room{" +
+                "roomLocation='" + roomLocation + '\'' +
+                ", roomId='" + roomId + '\'' +
+                ", roomCapacity=" + roomCapacity +
+                ", inGroup=" + inGroup +
+                ", status=" + status +
+                ", roomPrice=" + roomPrice +
+                '}';
+    }
+
 }
