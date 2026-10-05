@@ -1,6 +1,5 @@
 package service;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
@@ -43,8 +42,8 @@ public class hotelService {
     }
 
 
-    // ===== FIND Contract by Customer
-    public List<RentalContract> findContractByCustomer(Customer customer){
+    // ===== FIND Contract by Customer that is onGoing
+    public List<RentalContract> findOnGoingContractByCustomer(Customer customer){
         List<RentalContract> result = new ArrayList<>();
         for(RentalContract c : contracts){
             if(c.getCustomer().equals(customer) && c.getStatus() == contractStatus.onGoing){
@@ -53,6 +52,17 @@ public class hotelService {
         }
 
         return result;
+    }
+
+    // ===== FIND Contract by ID
+    public RentalContract findContractById(String contractId){
+        for(RentalContract c : contracts){
+            if(c.getContractId().equals(contractId)){
+                return c;
+            }
+        }   
+
+        return null;
     }
 
 
@@ -125,43 +135,14 @@ public class hotelService {
 
 
     // ===== Check IN
-    public boolean checkIn(Customer customer, LocalDateTime checkInTime){
-        // Find the contract that stand under customerName
-        List<RentalContract> customerContracts = findContractByCustomer(customer);
+    public boolean checkIn(String contractId, LocalDateTime checkInTime){
+        RentalContract contract = findContractById(contractId);
 
-        // If can't find the contract, return false
-        if(customerContracts.isEmpty()){
-            System.out.println("No contract found for this customer");
+        if (contract == null) {
+            System.out.println("Contract not found");
             return false;
         }
 
-        // Display the contracts and ask for contract ID
-        System.out.println("Customer has the following contracts:");
-        for(RentalContract c : customerContracts){
-            System.out.println(c.toString());
-        }
-        System.out.println("Please enter the contract ID to check in:");
-        Console console = System.console();
-        
-        // Read the contract ID from the console
-        String contractId = console.readLine();
-
-        RentalContract contract = null;
-
-        while (contract == null) {
-
-            for (RentalContract c : customerContracts) {
-                if (c.getContractId().equals(contractId)) {
-                    contract = c;
-                    break;
-                }
-            }
-
-            if (contract == null) {
-                System.out.println("Contract not found. Try again:");
-                contractId = console.readLine();
-            }
-        }
 
         // Check if the check-in time is valid
         if(checkInTime.isBefore(contract.getStartTime()) || checkInTime.isAfter(contract.getEndTime())){
@@ -176,43 +157,14 @@ public class hotelService {
     }
     
     // ===== Check OUT
-    public boolean checkOut(Customer customer, LocalDateTime checkOutTime){
-        // Find the contract that stand under customerName
-        List<RentalContract> customerContracts = findContractByCustomer(customer);
+    public boolean checkOut(String contractId, LocalDateTime checkOutTime){
+        RentalContract contract = findContractById(contractId);
 
-        // If can't find the contract, return false
-        if(customerContracts.isEmpty()){
-            System.out.println("No contract found for this customer");
+        if (contract == null) {
+            System.out.println("Contract not found");
             return false;
         }
 
-        // Display the contracts and ask for contract ID
-        System.out.println("Customer has the following contracts:");
-        for(RentalContract c : customerContracts){
-            System.out.println(c.toString());
-        }
-        System.out.println("Please enter the contract ID to check in:");
-        Console console = System.console();
-        
-        // Read the contract ID from the console
-        String contractId = console.readLine();
-
-        RentalContract contract = null;
-
-        while (contract == null) {
-
-            for (RentalContract c : customerContracts) {
-                if (c.getContractId().equals(contractId)) {
-                    contract = c;
-                    break;
-                }
-            }
-
-            if (contract == null) {
-                System.out.println("Contract not found. Try again:");
-                contractId = console.readLine();
-            }
-        }
 
         // Check if the check-out time is valid
         if(checkOutTime.isBefore(contract.getCheckInTime())){
@@ -223,6 +175,7 @@ public class hotelService {
         // Set the check-out time for the contract
         contract.setCheckOutTime(checkOutTime);
         contract.endContract();
+        contract.getRoom().setRoomStatus(roomStatus.AVAILABLE);
 
         return true;
     }
