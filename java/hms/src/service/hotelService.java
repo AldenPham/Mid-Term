@@ -89,6 +89,11 @@ public class hotelService {
                             LocalDateTime startTime,
                             LocalDateTime endTime){
         // Check startTime and endTime is valid or no
+        if (startTime == null || endTime == null) {
+            System.out.println("Start time or end time cannot be null");
+            return false;
+        }
+
         if(startTime.isAfter(endTime) || startTime.isEqual(endTime)){
             System.out.println("Invalid start time or end time");
             return false;
@@ -154,6 +159,11 @@ public class hotelService {
         }
 
         // Check if the check-in time is valid
+        if (checkInTime == null) {
+            System.out.println("Check-in time cannot be null");
+            return false;
+        }
+
         if(checkInTime.isBefore(contract.getStartTime()) || checkInTime.isAfter(contract.getEndTime())){
             System.out.println("Invalid check-in time");
             return false;
@@ -185,6 +195,11 @@ public class hotelService {
         }
 
         // Check if the check-out time is valid
+        if (checkOutTime == null) {
+            System.out.println("Check-out time cannot be null");
+            return false;
+        }
+
         if(checkOutTime.isBefore(contract.getCheckInTime())){
             System.out.println("Invalid check-out time");
             return false;
@@ -238,6 +253,22 @@ public class hotelService {
     public void createInvoice(RentalContract contract,
                              Customer payer,
                              paymentType paymentType) {
+        if (contract == null) {
+            System.out.println("Contract not found");
+            return;
+        }
+
+        if (contract.getCheckOutTime() == null) {
+            System.out.println("Customer has not checked out");
+            return;
+        }
+        
+        for (Invoice invoice : invoices) {
+            if (invoice.getContract().equals(contract)) {
+                System.out.println("Invoice already exists for this contract");
+                return;
+            }
+        }
 
         double roomFee = calculateRoomFee(contract);
         double overstayFee = calculateOverstayFee(contract);

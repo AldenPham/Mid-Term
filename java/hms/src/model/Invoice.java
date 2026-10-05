@@ -43,6 +43,11 @@ public class Invoice {
         this.total = total;
     }
 
+
+    public RentalContract getContract() {
+        return contract;
+    }
+    
     public String toString() {
         return "Invoice{" +
                 "invoiceId='" + invoiceId + '\'' +
