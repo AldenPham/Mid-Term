@@ -1,6 +1,8 @@
 package model;
+import model.enums.*;
+import model.enums.roomStatus;
 
-public abstract class Room {
+public class Room {
     private String roomLocation;
     private String roomId;
     private int roomCapacity;
@@ -21,6 +23,37 @@ public abstract class Room {
         this.inGroup = inGroup;
         this.status = status;
         this.roomPrice = roomPrice;
+    }
+
+    public String getRoomId(){
+        return roomId;
+    }
+
+    public roomStatus getRoomStatus(){
+        return status;
+    }
+
+    public void setRoomStatus(roomStatus status){
+        this.status = status;
+    }
+
+    public double getRoomPrice(){
+        return roomPrice;
+    }
+
+    public roomType getRoomType(){
+        return inGroup.getType();
+    }
+
+    public String toString() {
+        return "Room{" +
+                "roomLocation='" + roomLocation + '\'' +
+                ", roomId='" + roomId + '\'' +
+                ", roomCapacity=" + roomCapacity +
+                ", inGroup=" + inGroup +
+                ", status=" + status +
+                ", roomPrice=" + roomPrice +
+                '}';
     }
 
 }

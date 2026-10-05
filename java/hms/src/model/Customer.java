@@ -1,6 +1,8 @@
 package model;
+import model.enums.*;
 
-public abstract class Customer {
+
+public class Customer {
     private String id;
     private String name;
     private String phoneNumber;
@@ -8,6 +10,8 @@ public abstract class Customer {
     private int timeStayed = 0;
     private int moneySpended = 0;
     private customerType type;
+
+    //Constructor
     public Customer(String id,
                     String name,
                     String phoneNumber,
@@ -19,5 +23,25 @@ public abstract class Customer {
         this.phoneNumber = phoneNumber;
         this.cccd = cccd;
         this.type = type;
+    }
+
+    public String get_id(){
+        return id;
+    }
+
+    public String getCustomerName(){
+        return name;
+    }   
+
+    public String toString() {
+        return "Customer{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", cccd='" + cccd + '\'' +
+                ", timeStayed=" + timeStayed +
+                ", moneySpended=" + moneySpended +
+                ", type=" + type +
+                '}';
     }
 }
